@@ -1,0 +1,4 @@
+
+<ul class="list-group" *ngFor="let user of users | async">
+    <li class="list-group-item">{{user.name}} - {{user.email}}</li>
+</ul>

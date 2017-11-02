@@ -4,6 +4,11 @@
     Full Stack Example
   </h1>
 </div>
+<ul class="nav nav-tabs">
+    <li role="presentation"><a routerLink="/users" routerLinkActive="active">Users</a></li>
+    <li role="presentation"><a routerLink="/groups" routerLinkActive="active">Groups</a></li>
+    <li role="presentation"><a (click)="onLogout()">Logout</a></li>
+</ul>  
 
 <router-outlet>
 </router-outlet>
