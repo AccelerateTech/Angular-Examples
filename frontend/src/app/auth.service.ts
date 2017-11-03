@@ -16,7 +16,7 @@ export class AuthService {
             localStorage.setItem('myToken',this.token);
             this.router.navigate(['/users']);
         },(err)=>{
-            alert(err);
+            alert("You are not logged in. Dude!");
         });
     }
 

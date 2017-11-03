@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { Observable } from 'rxjs';
+import { User } from './user.model';
 
 @Component({
   selector: 'app-users',
@@ -9,11 +10,15 @@ import { Observable } from 'rxjs';
 })
 export class UsersComponent implements OnInit {
 
-  users: Observable<Array<object>>
+  usersObservable: Observable<Array<User>>
+  usersNormal: Array<User>
   constructor(private userService:UserService) { }
 
   ngOnInit() {
-    this.users = this.userService.getUsers()
+    this.usersObservable = this.userService.getUsers()
+    this.userService.getUsers().subscribe((users)=>{
+      this.usersNormal = users
+    });
   }
 
 }

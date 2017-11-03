@@ -44,10 +44,11 @@ app.post("/api/login", function(req, res) {
         }
     } else {
         res.sendStatus(401);
+
     }
 });
 
-
+// Reloading the backend when backend is changed.
 reloadServer = reload(app);
 
 watch.watchTree(__dirname + "/frontend", function (f, curr, prev) {
@@ -60,6 +61,7 @@ app.use(express.static('frontend'));
 app.use(function(req, res, next) {
     res.sendFile(__dirname + "/frontend/index.html");
 })
+
 
 
 app.listen(8080);
