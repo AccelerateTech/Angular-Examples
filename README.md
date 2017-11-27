@@ -14,7 +14,7 @@ In frontend
 
 ```bash
     npm install
-    ng build --watch --output-path ../backend/frontend
+    ng build --watch 
 ```
 
 Now you can start experimentating the full stack example !
