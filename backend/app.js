@@ -51,15 +51,15 @@ app.post("/api/login", function(req, res) {
 // Reloading the backend when backend is changed.
 reloadServer = reload(app);
 
-watch.watchTree(__dirname + "/frontend", function (f, curr, prev) {
+watch.watchTree(__dirname + "/frontend/dist", function (f, curr, prev) {
     // Fire server-side reload event 
     reloadServer.reload();
 });
 
-app.use(express.static('frontend'));
+app.use(express.static('frontend/dist'));
 
 app.use(function(req, res, next) {
-    res.sendFile(__dirname + "/frontend/index.html");
+    res.sendFile(__dirname + "/frontend/dist/index.html");
 })
 
 
