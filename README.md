@@ -12,6 +12,15 @@ In backend
 
 In frontend
 
+Replace the `facebookAppId` in `environment.ts` and `environment.prod.ts` if you want to use your own facebook app to login.
+```javascript
+export const environment = {
+  production : false,
+  // Put your own facebook app id here
+  facebookAppId : "1234567890123456"
+};
+```
+
 ```bash
     npm install
     ng build --watch 
