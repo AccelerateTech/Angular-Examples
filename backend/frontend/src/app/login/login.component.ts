@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { FacebookAuthService } from '../facebook-auth.service';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private authService:AuthService,private router:Router) { }
+  constructor(private authService:AuthService,private router:Router,private facebookAuthService:FacebookAuthService) { }
 
   ngOnInit() {
     if(this.authService.isAuthenticated()){
@@ -19,5 +20,9 @@ export class LoginComponent implements OnInit {
 
   onSubmit(formData){
     this.authService.logIn(formData.email,formData.password);
+  }
+
+  onLoginWithFacebook(event){
+    this.facebookAuthService.logIn();
   }
 }

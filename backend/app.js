@@ -1,10 +1,10 @@
 
-
 const express = require('express');
 const reload = require('reload');
 const watch = require('watch');
 const bodyParser = require("body-parser");  
 const jwt = require('jwt-simple');
+const axios = require('axios');
 const auth = require('./auth')();
 const config = require('./config');
 const users = require('./users');
@@ -42,6 +42,37 @@ app.post("/api/login", function(req, res) {
         } else {
             res.sendStatus(401);
         }
+    } else {
+        res.sendStatus(401);
+
+    }
+});
+
+app.post("/api/login/facebook", function(req, res) {  
+    if (req.body.access_token) {
+        var accessToken = req.body.access_token;
+        axios.get(`https://graph.facebook.com/me?access_token=${accessToken}`)
+        .then((data)=>{
+            if(!data.error){
+                var payload = {
+                    id: accessToken
+                };
+                users.push({
+                    id: accessToken,
+                    name: "Facebook User",
+                    email: "placeholder@gmail.com"
+                })
+                var token = jwt.encode(payload, config.jwtSecret);
+                res.json({
+                    token: token
+                });
+            }else{
+                res.sendStatus(401);
+            }
+        }).catch((err)=>{
+            console.log(err);
+            res.sendStatus(401);
+        });
     } else {
         res.sendStatus(401);
 

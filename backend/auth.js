@@ -9,7 +9,9 @@ module.exports = ()=>{
         secretOrKey: config.jwtSecret,
         jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken()
     },(payload,done)=>{
-        const user = users[payload.id];
+        const user = users.find((user)=>{
+            return user.id == payload.id
+        });
         if (user) {
             return done(null, {id: user.id});
         } else {

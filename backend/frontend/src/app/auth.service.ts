@@ -20,6 +20,16 @@ export class AuthService {
         });
     }
 
+    facebookLogin(access_token){
+        return this.http.post('/api/login/facebook',{access_token:access_token}).subscribe((res)=>{
+            this.token = res.json().token;
+            localStorage.setItem('myToken',this.token);
+            this.router.navigate(['/users']);
+        },(err)=>{
+            alert("You are not logged in. Dude!");
+        });
+    }
+
     isAuthenticated(){
         return this.token != null;
     }
