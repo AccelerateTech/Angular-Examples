@@ -1,11 +1,10 @@
-import * as passport from 'passport'
-import * as passportJWT from 'passport-jwt';
-import config from './config';
-import users from './users';
-
+const passport = require('passport');
+const passportJWT = require('passport-jwt');
+const config = require('./config');
+const users = require('./users');
 const ExtractJwt = passportJWT.ExtractJwt;
 
-export default function(){
+module.exports = ()=>{
     const strategy = new passportJWT.Strategy({
         secretOrKey: config.jwtSecret,
         jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken()
