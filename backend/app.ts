@@ -1,17 +1,18 @@
 
-const express = require('express');
-const reload = require('reload');
-const watch = require('watch');
-const bodyParser = require("body-parser");  
-const jwt = require('jwt-simple');
-const axios = require('axios');
-const auth = require('./auth')();
-const config = require('./config');
-const users = require('./users');
-const groups = require('./groups');
+import * as express from 'express';
+import * as reload from 'reload';
+import * as watch from 'watch';
+import * as bodyParser from 'body-parser';
+import * as jwt from 'jwt-simple';
+import axios from 'axios';
+import authClass from './auth';
+import config from './config';
+import users from './users';
+import groups from './groups';
 
 
 const app = express();
+const auth = authClass();
 
 app.use(bodyParser.json());
 app.use(auth.initialize());
@@ -51,16 +52,18 @@ app.post("/api/login", function(req, res) {
 app.post("/api/login/facebook", function(req, res) {  
     if (req.body.access_token) {
         var accessToken = req.body.access_token;
+        
         axios.get(`https://graph.facebook.com/me?access_token=${accessToken}`)
         .then((data)=>{
-            if(!data.error){
+            if(!data.data.error){
                 var payload = {
                     id: accessToken
                 };
                 users.push({
                     id: accessToken,
                     name: "Facebook User",
-                    email: "placeholder@gmail.com"
+                    email: "placeholder@gmail.com",
+                    password: "123456"
                 })
                 var token = jwt.encode(payload, config.jwtSecret);
                 res.json({
@@ -80,7 +83,7 @@ app.post("/api/login/facebook", function(req, res) {
 });
 
 // Reloading the backend when backend is changed.
-reloadServer = reload(app);
+let reloadServer = reload(app);
 
 watch.watchTree(__dirname + "/frontend/dist", function (f, curr, prev) {
     // Fire server-side reload event 
