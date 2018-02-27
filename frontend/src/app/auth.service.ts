@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from "@angular/router";
 import { Http } from '@angular/http';
+import { environment} from '../environments/environment'
 
 @Injectable()
 export class AuthService {
@@ -11,7 +12,7 @@ export class AuthService {
     }
 
     logIn(email: string, password: string){
-        return this.http.post('/api/login',{email:email,password:password}).subscribe((res)=>{
+        return this.http.post(`${environment.apiServer}/api/login`,{email:email,password:password}).subscribe((res)=>{
             this.token = res.json().token;
             localStorage.setItem('myToken',this.token);
             this.router.navigate(['/users']);
@@ -21,7 +22,7 @@ export class AuthService {
     }
 
     facebookLogin(access_token){
-        return this.http.post('/api/login/facebook',{access_token:access_token}).subscribe((res)=>{
+        return this.http.post(`${environment.apiServer}/api/login/facebook`,{access_token:access_token}).subscribe((res)=>{
             this.token = res.json().token;
             localStorage.setItem('myToken',this.token);
             this.router.navigate(['/users']);

@@ -6,5 +6,6 @@
 export const environment = {
   production: false,
   // Put your own facebookAppID here
-  facebookAppId : "1234567890123456"
+  facebookAppId : "1234567890123456",
+  apiServer: "http://localhost:8080"
 };

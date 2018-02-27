@@ -1,14 +1,13 @@
 
 import * as express from 'express';
-import * as reload from 'reload';
-import * as watch from 'watch';
 import * as bodyParser from 'body-parser';
 import * as jwt from 'jwt-simple';
 import axios from 'axios';
 import authClass from './auth';
 import config from './config';
-import users from './users';
 import groups from './groups';
+import users from './users';
+import * as cors from 'cors';
 
 
 const app = express();
@@ -16,6 +15,7 @@ const auth = authClass();
 
 app.use(bodyParser.json());
 app.use(auth.initialize());
+app.use(cors());
 
 app.get('/api/groups',auth.authenticate(),(req,res)=>{
     res.json(groups);
@@ -78,25 +78,8 @@ app.post("/api/login/facebook", function(req, res) {
         });
     } else {
         res.sendStatus(401);
-
     }
 });
-
-// Reloading the backend when backend is changed.
-let reloadServer = reload(app);
-
-watch.watchTree(__dirname + "/frontend/dist", function (f, curr, prev) {
-    // Fire server-side reload event 
-    reloadServer.reload();
-});
-
-app.use(express.static('frontend/dist'));
-
-app.use(function(req, res, next) {
-    res.sendFile(__dirname + "/frontend/dist/index.html");
-})
-
-
 
 app.listen(8080);
 

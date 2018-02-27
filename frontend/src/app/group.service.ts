@@ -1,22 +1,18 @@
 import { Injectable } from "@angular/core";
-import { Http, RequestOptions,Headers } from "@angular/http";
+import { Http, RequestOptions, Headers} from "@angular/http";
 import { AuthService } from "./auth.service";
+import { environment } from "../environments/environment"
 import 'rxjs/Rx';
-import { User } from "./users/user.model";
-
 
 @Injectable()
-export class UserService{
+export class GroupService{
     
     constructor(private http:Http,private authService:AuthService){}
 
-    getUsers(){
+    getGroups(){
         // For Authentication
         let headers = new Headers({ 'Authorization': 'Bearer ' + this.authService.token });
         let options = new RequestOptions({headers:headers});
-        return this.http.get('/api/users',options).map((res)=>{
-            return res.json().map((userJsonObj)=>new User(userJsonObj))
-        });
+        return this.http.get(`${environment.apiServer}/api/groups`,options).map((res)=>res.json());
     }
 }
-

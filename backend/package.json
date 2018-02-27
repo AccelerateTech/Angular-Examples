@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --watch '**/*.ts' --exec 'ts-node' app.ts & cd frontend; ng build --watch"
+    "start": "nodemon --watch '**/*.ts' --exec 'ts-node' app.ts"
   },
   "author": "",
   "license": "ISC",
@@ -19,11 +19,10 @@
     "@types/watch": "^1.0.0",
     "axios": "^0.17.1",
     "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
     "express": "^4.16.2",
     "jwt-simple": "^0.5.1",
     "passport": "^0.4.0",
-    "passport-jwt": "^3.0.1",
-    "reload": "^2.2.2",
-    "watch": "^1.0.2"
+    "passport-jwt": "^3.0.1"
   }
 }
