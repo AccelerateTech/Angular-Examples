@@ -1,4 +1,5 @@
+<search-box (search)="onFilter($event)"></search-box>
 
-<ul class="list-group" *ngFor="let group of groups | async">
+<ul class="list-group" *ngFor="let group of groups | async" >
   <li class="list-group-item">{{group.name}}</li>
 </ul>

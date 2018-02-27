@@ -1,4 +1,6 @@
 
+<search-box (search)="onFilter($event)"></search-box>
+
 <ul class="list-group" *ngFor="let user of usersObservable | async">
     <li class="list-group-item">{{user.name}} - {{user.email}}</li>
 </ul>

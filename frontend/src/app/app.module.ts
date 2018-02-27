@@ -14,6 +14,8 @@ import { GroupsComponent } from './groups/groups.component';
 import { AuthGuard } from './auth-guard.service';
 import { FacebookAuthService } from './facebook-auth.service';
 import { FacebookComponent } from './facebook/facebook.component';
+import { SearchBoxComponent } from './search-box/search-box.component';
+import { FilterService } from './filter.service';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { FacebookComponent } from './facebook/facebook.component';
     LoginComponent,
     UsersComponent,
     GroupsComponent,
-    FacebookComponent
+    FacebookComponent,
+    SearchBoxComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,7 +39,8 @@ import { FacebookComponent } from './facebook/facebook.component';
     GroupService, 
     AuthGuard, 
     OAuthService,
-    FacebookAuthService
+    FacebookAuthService,
+    FilterService
   ],
   bootstrap: [AppComponent]
 })
