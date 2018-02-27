@@ -18,7 +18,6 @@ export class SearchBoxComponent implements OnInit {
   }
 
   onKeyup(event){
-    console.log(event.target.value);
     this.search.emit(event.target.value);
   }
 
